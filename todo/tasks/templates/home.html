@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Tasks Home </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+    <nav class="flex gap-2 p-4 bg-teal-500 text-black shadow-lg">
+        <a href="/" class="font-bold text-xl"> Todo List </a>
+    </nav>
+    <p class="text-lg font-bold p-4"> Welcome to our Task List </p>
+    <div class="p-4">
+        <a href="/add" class="p-2 bg-teal-500 rounded-lg shadow-lg"> Add Tasks </a>
+    </div>
+    <hr>
+    <div class="p-4">
+        <h1 class="font-bold"> All Tasks </h1>
+        <table class="w-full table-auto border shadow-lg">
+            <thead>
+                <tr class="p-2 bg-black text-white text-start">
+                    <th> # </th>
+                    <th> Date </th>
+                    <th> Title </th>
+                    <th> Status </th>
+                    <th> Action </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for each in all_tasks %}
+                    <tr class="p-4">
+                        <td> {{ each.id }} </td>
+                        <td> {{ each.date }} </td>
+                        <td> {{ each.title }} </td>
+                        <td> Complete </td>
+                        <td>
+                            <a href="/read/{{ each.id }}" class="p-2 bg-teal-500 rounded-lg shadow-lg"> Read </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
