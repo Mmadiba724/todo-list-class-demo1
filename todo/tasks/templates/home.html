@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Tasks Home </title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="bg-gray-100">
@@ -19,6 +20,24 @@
     <hr>
     <div class="p-4">
         <h1 class="font-bold"> All Tasks </h1>
+        <div class="p-4 bg-white shadow">
+            {% for each in all_tasks %}
+                <div class="flex items-center justify-between p-2 border border-b-2">
+                    <div class="flex gap-2">
+                        {% if each.status == 0 %}
+                            <i class="fa fa-solid fa-xmark text-amber-500"></i>
+                            <p class="text-amber-500"> <a href="/read/{{each.id}}"> {{ each.title }} </a> </p>
+                        {% else %}
+                            <i class="fa fa-check-circle text-green-500"> </i>
+                            <p class="line-through"> {{ each.title }} </p>
+                        {% endif %}
+                    </div>
+                    <div class="flex gap-2 text-gray-500">
+                        {{ each.date }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
         <table class="w-full table-auto border shadow-lg">
             <thead>
                 <tr class="p-2 bg-black text-white text-start">
@@ -35,9 +54,15 @@
                         <td> {{ each.id }} </td>
                         <td> {{ each.date }} </td>
                         <td> {{ each.title }} </td>
-                        <td> Complete </td>
                         <td>
-                            <a href="/read/{{ each.id }}" class="p-2 bg-teal-500 rounded-lg shadow-lg"> Read </a>
+                            {% if each.status == 0 %}
+                                <p class="text-amber-500"> Pending </p>
+                            {% else %}
+                                <p class="text-green-500"> Complete </p>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="/read/{{ each.id }}" class="text-blue-500"> Read </a>
                         </td>
                     </tr>
                 {% endfor %}

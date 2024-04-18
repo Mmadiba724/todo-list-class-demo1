@@ -13,17 +13,27 @@
         <a href="/" class="font-bold text-xl"> Todo List </a>
     </nav>
     <div class="flex gap-2 p-4">
-        <a href="" class="bg-blue-500 text-white p-2 rounded"> Edit </a>
-        <a href="" class="bg-red-500 text-white p-2 rounded"> Delete </a>
+        {% if task.status == 0 %}
+            <a href="/edit/{{ task.id }}" class="bg-green-500 text-white p-2 rounded"> Mark as Completed </a>
+        {% else %}
+            <a href="/edit/{{ task.id }}" class="bg-amber-500 text-white p-2 rounded"> Mark as Pending </a>
+        {% endif %}
+        <a href="/delete/{{ task.id }}" class="bg-red-500 text-white p-2 rounded"> Delete </a>
     </div>
     <div class="p-4 bg-amber-100 m-4 shadow-lg flex flex-col gap-2">
         <p class="text-gray-500"> #{{ task.id }} </p>
-        <h1 class="font-bold text-xl">  {{ task.title }} </h1>
+        <h1 class="font-bold text-xl"> {{ task.title }} </h1>
         <p class="text-gray-500"> {{ task.content }} </p>
         <p class="text-gray-500"> {{ task.date }} </p>
-        <p class="px-2 py-1 rounded bg-green-500 text-white w-[150px]">
-            Complete
-        </p>
+        {% if task.status == 0 %}
+            <p class="px-2 py-1 rounded bg-amber-500 text-white w-[150px] text-center">
+                Pending
+            </p>
+        {% elif task.status == 1 %}
+            <p class="px-2 py-1 rounded bg-green-500 text-white w-[150px] text-center">
+                Complete
+            </p>
+        {% endif %}
     </div>
 
 </body>
